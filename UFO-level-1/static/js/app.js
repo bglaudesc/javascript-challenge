@@ -5,7 +5,7 @@ var tableData = data;
 var tbody = d3.select("tbody");
 
 function pop_table(arr){
-    tbody.html("")
+    tbody.html("");
     for (var row of arr) {
         var tr = tbody.append("tr");
         tr.append("td").text(row.datetime);
@@ -19,14 +19,16 @@ function pop_table(arr){
     };
 }
 
-d3.select("#filter-btn").on("click", function () {
-    var userInput = d3.select("#datetime").property("value")
-    var filterData = tableData.filter(item => item.datetime === userInput)
-    console.log(filterData)
-    pop_table(filterData)
-    
-    
-})
+function run_filter(){
+    d3.event.preventDefault();
+    var userInput = d3.select("#datetime").property("value");
+    var filterData = tableData.filter(item => item.datetime === userInput);
+    // console.log(d3.event);
+    pop_table(filterData);
+};
 
-pop_table(tableData)
+
+d3.select("#filter-btn").on("click", run_filter); 
+
+pop_table(tableData);
 // YOUR CODE HERE!
